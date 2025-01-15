@@ -23,7 +23,7 @@ import imgAbout from '../../../assets/images/homeimg/home.jpg';
 
 const AboutSection = () => {
     return (
-        <div className="w-10/12 mx-auto mt-32 mb-32">
+      <div className="w-10/12 mx-auto mt-32 mb-32">
             <div className="flex flex-col lg:flex-row gap-12 justify-center items-center">
                 
                 {/* Image Section */}

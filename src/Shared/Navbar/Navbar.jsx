@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
     const navOptions = <>
         <li><Link to='/' className="text-xl text-teal-200 font-semibold hover:text-teal-400 transition duration-200">Home</Link></li>
-        <li><Link to='/about' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Login</Link></li>
-        <li><Link to='/services' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Register</Link></li>
+        <li><Link to='/login' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Login</Link></li>
+        <li><Link to='/register' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Register</Link></li>
         <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Join as Developer</Link></li>
     </>;
 

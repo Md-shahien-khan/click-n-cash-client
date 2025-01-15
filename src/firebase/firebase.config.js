@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAK44alhF8cHJidsZyQ9TbvP12qgKwBWWw",
-  authDomain: "click-n-cash-e0801.firebaseapp.com",
-  projectId: "click-n-cash-e0801",
-  storageBucket: "click-n-cash-e0801.firebasestorage.app",
-  messagingSenderId: "967305085628",
-  appId: "1:967305085628:web:c02913009ce448dbe306b9"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

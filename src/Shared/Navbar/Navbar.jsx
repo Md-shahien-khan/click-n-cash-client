@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import logo from '../../assets/images/logo/logo.png'
 const Navbar = () => {
     const navOptions = <>
         <li><Link to='/' className="text-xl text-teal-200 font-semibold hover:text-teal-400 transition duration-200">Home</Link></li>
@@ -33,7 +33,10 @@ const Navbar = () => {
                             {navOptions}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl text-teal-100 font-bold">Click & Cash</a>
+                    <div>
+                    {/* <a className="btn btn-ghost text-xl text-teal-100 font-bold">Click & Cash</a> */}
+                    <img className="w-10 md:w-20" src={logo} alt="" />
+                    </div>  
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 space-x-6">

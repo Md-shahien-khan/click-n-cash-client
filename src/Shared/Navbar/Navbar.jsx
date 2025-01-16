@@ -1,11 +1,38 @@
 import { Link } from "react-router-dom";
 import logo from '../../assets/images/logo/logo.png'
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { PiCoinVerticalBold } from "react-icons/pi";
 const Navbar = () => {
+    const {user, logOut} = useContext(AuthContext);
+
+    // Log out
+    const handleLogOut = () =>{
+        logOut()
+        .then(() =>{})
+        .catch(error => console.log(error));
+    }
+
     const navOptions = <>
         <li><Link to='/' className="text-xl text-teal-200 font-semibold hover:text-teal-400 transition duration-200">Home</Link></li>
-        <li><Link to='/login' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Login</Link></li>
-        <li><Link to='/register' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Register</Link></li>
         <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Join as Developer</Link></li>
+        
+        {
+            user ? <>
+            <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200"> 
+                <button className="btn bg-teal-50">
+                <PiCoinVerticalBold  className="text-yellow-500 text-xl"/>
+                <div className="badge badge-accent">0</div>
+                </button></Link>
+            </li>
+            <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">User Profile</Link></li>
+            <button onClick={handleLogOut} className="btn btn-ghost text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Logout</button>
+            </> : <>
+            <li><Link to='/login' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Login</Link></li>
+            <li><Link to='/register' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Register</Link></li>
+            <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Join as Developer</Link></li>
+            </>
+        }
     </>;
 
     return (
@@ -44,7 +71,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn text-white bg-teal-500 hover:bg-teal-700 transition duration-200">Sign In</a>
+                    <button className="btn text-white bg-teal-500 hover:bg-teal-700 transition duration-200">Click & Cash</button>
                 </div>
             </div>
         </div>

@@ -1,180 +1,146 @@
-import { div } from 'framer-motion/client';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link, useNavigate } from 'react-router-dom';
 import imgLogin from '../../assets/images/homeimg/login.jpg'
-import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
+
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    profilePictureURL: '',
-    role: 'Worker',
-    coins: 0,
-  });
+  const {register, handleSubmit, reset, formState  : { errors }} = useForm();
+  const navigate = useNavigate();
+  const {createUser, updateUserProfile} = useContext(AuthContext)
 
-  const [errors, setErrors] = useState({
-    email: '',
-    password: '',
-  });
+  // submit form
+  const onSubmit = data => {
+    console.log(data);
+    createUser(data.email, data.password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            updateUserProfile(data.name, data.photoURL)
+                .then(() => {
+                    console.log('user profile info updated');
+                    reset();
+                    Swal.fire({
+                        title: "User registered successfully",
+                        showClass: {
+                          popup: `
+                            animate__animated
+                            animate__fadeInUp
+                            animate__faster
+                          `
+                        },
+                        hideClass: {
+                          popup: `
+                            animate__animated
+                            animate__fadeOutDown
+                            animate__faster
+                          `
+                        }
+                      });
+                      navigate('/')
+                })
+                .catch(error => console.log(error))
+        })
+};
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleRoleChange = (e) => {
-    const { value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      role: value,
-      coins: value === 'Worker' ? 10 : 50,
-    }));
-  };
-
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    const minLength = 8;
-    const hasNumber = /\d/;
-    const hasUpperCase = /[A-Z]/;
-    return password.length >= minLength && hasNumber.test(password) && hasUpperCase.test(password);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let emailError = '';
-    let passwordError = '';
-
-    if (!validateEmail(formData.email)) {
-      emailError = 'Please enter a valid email address.';
-    }
-
-    if (!validatePassword(formData.password)) {
-      passwordError = 'Password must be at least 8 characters long, contain a number, and an uppercase letter.';
-    }
-
-    if (emailError || passwordError) {
-      setErrors({
-        email: emailError,
-        password: passwordError,
-      });
-    } else {
-      // Handle successful registration (e.g., send data to API or save in state)
-      alert('Registration successful!');
-      // Reset the form
-      setFormData({
-        name: '',
-        email: '',
-        password: '',
-        profilePictureURL: '',
-        role: 'Worker',
-        coins: 10,
-      });
-      setErrors({ email: '', password: '' });
-    }
-  };
-
+  // console.log(watch("example"));
   return (
     <div>
       <Helmet>
         <title>Click & Cash | Registration</title>
       </Helmet>
       <div className="flex justify-center items-center min-h-screen bg-teal-50">
+        {/* img */}
         <div className='hidden lg:block'>
-          {/* img */}
           <img className='w-[1050px] h-full' src={imgLogin} alt="" />
         </div>
-      <div className="bg-teal-100 border border-teal-500 p-8 shadow-lg w-full max-w-sm h-[700px]">
-        <h2 className="text-2xl font-bold text-center mb-6">Registration Form</h2>
-        <form onSubmit={handleSubmit}>
-          {/* Name */}
+        <div className="p-8 shadow-lg w-full max-w-sm bg-teal-100 border border-teal-500  h-[700px]">
+          <h2 className="text-2xl font-bold text-teal-800 mb-3">Register</h2>
+          <p className='mb-3'>Please fill all the required form to create an account in Click & Cash</p>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {/* Name */}
           <div className="mb-4">
             <label className="block text-gray-700">Name</label>
             <input
+              {...register("name", {required : true})}
               type="text"
               name="name"
-              value={formData.name}
-              onChange={handleInputChange}
+              placeholder='Enter your name'
               required
               className="w-full p-3 border border-gray-300 rounded-lg mt-2"
             />
+            {errors.name?.type === 'required' && <span className='text-red-600'>This field is required</span>}
           </div>
-
-          {/* Email */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2"
-            />
-            {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email}</p>}
-          </div>
-
           {/* Profile Picture URL */}
           <div className="mb-4">
             <label className="block text-gray-700">Profile Picture URL</label>
             <input
+            {...register("photoURL", {required : true})}
               type="url"
-              name="profilePictureURL"
-              value={formData.profilePictureURL}
-              onChange={handleInputChange}
+              name="photoURL"
               className="w-full p-3 border border-gray-300 rounded-lg mt-2"
+              placeholder='photo URL'
             />
+            {errors.imgURL?.type === 'required' && <span className='text-red-600'>This field is required</span>}
           </div>
-
-          {/* Password */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2"
-            />
-            {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password}</p>}
-          </div>
-
-          {/* Role Selection */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleRoleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2"
-            >
-              <option value="Worker">Worker</option>
-              <option value="Buyer">Buyer</option>
+          {/* role */}
+          <div className='mb-4'>
+            <select {...register("role")} >
+              <option value="">Role</option>
+              <option value="worker">Worker</option>
+              <option value="buyer">Buyer</option>
             </select>
           </div>
-
-          {/* Submit Button */}
-          <div className="mb-4 text-center">
-            <button
-              type="submit"
-              className="text-white p-3 w-full rounded-lg bg-teal-500 hover:bg-teal-700 transition"
-            >
-              Register
-            </button>
-          </div>
-          <p>Already have an account? <Link className='text-red-600' to='/login'>Login</Link></p>
-        </form>
-      </div>
-    </div>
+            {/* Email */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Email</label>
+              <input
+              {...register("email", {required : true})}
+                type="email"
+                name='email'
+                required
+                placeholder='Enter your email'
+                className="w-full p-3 border border-gray-300 rounded-lg mt-2"
+              />
+              {errors.email?.type === 'required' && <span className='text-red-600'>This field is required</span>}
+            </div>
+            {/* Password */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Password</label>
+              <input
+              {...register("password", {
+                required : true, 
+                minLength : 6, 
+                maxLength : 10,
+                pattern : /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{9}$/
+              })}
+                type="password"
+                name='password'
+                placeholder='Enter your password'
+                required
+                className="w-full p-3 border border-gray-300 rounded-lg mt-2"
+              />
+              {errors.password?.type === 'required' && <span className='text-red-600'>This field is required</span>}
+              {errors.password?.type === 'minLength' && <span className='text-red-600'>Password must be 6 characters</span>}
+              {errors.password?.type === 'maxLength' && <span className='text-red-600'>Password must be less than 10</span>}
+              {errors.password?.type === 'pattern' && <span className='text-red-600'>Password must have one upper one lower and one number</span>}
+            </div>
+          
+            {/* register Button */}
+            <div className="mb-4 text-center">
+              <input
+                type="submit"
+                value='Register'
+                className="text-white p-3 w-full rounded-lg bg-teal-500 hover:bg-teal-700 transition">
+              </input>
+            </div>
+            <p>Don't have any account? <Link className='text-red-600' to='/login'>Login</Link></p>
+          </form>
+        </div>
+        </div>
     </div>
   );
 };

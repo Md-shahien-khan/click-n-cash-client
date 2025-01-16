@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import imgLogo from '../assets/images/logo/logo.png'
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import {app} from '../firebase/firebase.config'
 
 // Auth Context
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 const auth = getAuth(app);
 // Inline Spinner Styles
 const spinnerStyles = {
@@ -29,20 +29,27 @@ const AuthProvider = ({children}) => {
 
     // create user
     const createUser = (email, password) =>{
-        setLoading(true);
+        // setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     };
 
     // sign in 
-    const signIn = (email, password) =>{
-        setLoading(true);
-        return signInWithEmailAndPassword(email, password);
+    const signIn = ( email, password) =>{
+        // setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     // log Out
     const logOut = () =>{
-        setLoading(true);
+        // setLoading(true);
         return signOut(auth);
+    }
+
+    // update user profile
+    const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        });
     }
 
     // unsubscribe
@@ -63,7 +70,8 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         signIn,
-        logOut
+        logOut,
+        updateUserProfile
     }
     return (
         <AuthContext.Provider value={authInfo}>

@@ -1,0 +1,66 @@
+[
+    {
+      "task_title": "Write Blog Post on Web Development Trends",
+      "task_detail": "We are looking for a skilled content writer to create a comprehensive 1500-word blog post focusing on the latest web development trends for the year 2025. The blog should cover key technologies, programming languages, frameworks, and methodologies emerging in the industry, such as advancements in JavaScript, AI-driven development tools, and the future of responsive design. The post should be well-researched, providing examples of how these technologies are transforming the industry and offering practical advice for developers looking to stay ahead of the curve. Your writing should engage readers, offering insights that are informative yet easy to understand. References to reputable sources should be included throughout the blog to substantiate the points made, and proper SEO practices should be followed to ensure the post ranks well on search engines.",
+      "required_workers": 5,
+      "payable_amount": 50,
+      "completion_date": "2025-02-10",
+      "submission_info": "The final submission should be in a Word document or Google Docs format, and include at least two external links to authoritative websites that back up claims. Ensure proper formatting with headings, subheadings, bullet points where applicable, and a meta description for SEO purposes.",
+      "task_image_url": "https://example.com/task_images/task1.jpg"
+    },
+    {
+      "task_title": "Design a Modern Logo for AI Startup",
+      "task_detail": "We need an experienced graphic designer to create a professional and distinctive logo for a tech startup specializing in artificial intelligence solutions. The logo should embody the innovative nature of AI while maintaining a clean and modern aesthetic. It should be simple yet memorable, ensuring the brand stands out in the competitive tech industry. The design should work well across a variety of media, from websites to mobile applications and printed marketing materials. Color scheme preferences are minimalistic, with a mix of cool tones like blues, purples, and metallics. You will be required to provide multiple concepts and revisions before final approval. Along with the logo, submit a brief rationale explaining how the design reflects the company's mission and values.",
+      "required_workers": 3,
+      "payable_amount": 75,
+      "completion_date": "2025-02-12",
+      "submission_info": "The final design should be provided in multiple file formats, including .ai, .png, .jpg, and .svg, along with vector files for scalability. Ensure that the logo is usable in both light and dark modes and provide a version with transparent backgrounds.",
+      "task_image_url": "https://example.com/task_images/task2.jpg"
+    },
+    {
+      "task_title": "Develop Portfolio Website for Graphic Designer",
+      "task_detail": "We are seeking a skilled web developer to build a portfolio website for a freelance graphic designer. The website should showcase the designer's work, with a homepage that features an introduction and an attractive visual design. The portfolio section should display a curated selection of past projects, including images, brief descriptions, and a few words from clients. There should also be an 'About Me' page detailing the designer's background, skills, and design philosophy, and a Contact page with a form that allows potential clients to get in touch. The website should be fully responsive, adapting to various screen sizes and devices, and easy to navigate. We require the website to be SEO-friendly, with proper meta tags, alt text for images, and optimized page load speed. The design should be minimalistic and elegant, using modern fonts and a clean layout.",
+      "required_workers": 4,
+      "payable_amount": 120,
+      "completion_date": "2025-02-20",
+      "submission_info": "The website should be delivered either as a live site (preferred) or in the form of a fully functional .zip file containing all files, including HTML, CSS, JavaScript, images, and other assets. Ensure that all links are working, the contact form functions properly, and the website passes Google Mobile-Friendly Tests.",
+      "task_image_url": "https://example.com/task_images/task3.jpg"
+    },
+    {
+      "task_title": "Create Instagram Content Plan for Fitness Brand",
+      "task_detail": "We are looking for a social media expert to create a 30-day content plan for Instagram for a growing fitness brand. The plan should cover a variety of post types, including promotional content for products, workout tips, motivational quotes, behind-the-scenes content, client testimonials, and community-building posts. Each post should include suggestions for high-quality images, captions that resonate with the target audience (fitness enthusiasts), and relevant hashtags to increase reach and engagement. The goal is to create a cohesive strategy that helps build brand awareness, encourages interaction with followers, and drives conversions (e.g., sales, sign-ups for fitness programs). The content should be scheduled strategically across the month to maintain consistent posting while avoiding over-saturation. Your plan should also include engagement strategies to interact with followers and promote conversations.",
+      "required_workers": 2,
+      "payable_amount": 60,
+      "completion_date": "2025-02-25",
+      "submission_info": "Submit the content plan as an Excel or Google Sheets document, with each post idea listed by date, complete with captions, image suggestions, and hashtags. Additionally, include a brief strategy for community engagement and audience growth on Instagram.",
+      "task_image_url": "https://example.com/task_images/task4.jpg"
+    },
+    {
+      "task_title": "Write Detailed Product Descriptions for E-commerce Site",
+      "task_detail": "We need a talented writer to craft 20 high-quality product descriptions for our e-commerce site specializing in home décor. Each description should be between 100-150 words, clearly highlighting the key features, material quality, size options, and aesthetic appeal of the products. The descriptions should be persuasive and reflect the brand's voice, encouraging customers to make a purchase. You should focus on the benefits of each product and explain how it can enhance the buyer’s living space. Additionally, the descriptions should be SEO-optimized, incorporating keywords that potential customers might search for when looking for home décor items online. Your goal is to inform the customer while creating a sense of urgency and appeal for the product.",
+      "required_workers": 5,
+      "payable_amount": 40,
+      "completion_date": "2025-02-28",
+      "submission_info": "Submit the descriptions in either Google Docs or Word format. The product descriptions should be neatly formatted with bullet points for product features and follow SEO guidelines (e.g., use keywords at least once in the first 100 words). Be sure to include an enticing and persuasive tone throughout.",
+      "task_image_url": "https://example.com/task_images/task5.jpg"
+    },
+    {
+      "task_title": "Create Wireframes for Fitness App UI",
+      "task_detail": "We are looking for a UX/UI designer to create wireframes for a fitness app that includes three core screens: a workout tracking screen, a user profile page, and a workout suggestion page. The wireframes should focus on user experience, ensuring ease of navigation and a smooth user journey. The workout tracking screen should allow users to log their exercises, track progress, and view workout stats. The user profile page should feature personal information, fitness goals, and activity history. The workout suggestion page should recommend personalized exercises based on the user’s fitness level and preferences. Ensure that the design is responsive and mobile-friendly, with an intuitive layout and simple, user-friendly interface. The wireframes should also demonstrate how different components will be organized on the screen, and how users will interact with the app’s features.",
+      "required_workers": 3,
+      "payable_amount": 100,
+      "completion_date": "2025-03-05",
+      "submission_info": "Submit the wireframes as high-resolution images or in PDF format, clearly showing the layout, user flow, and interactive elements. Ensure that the wireframes are detailed, easy to understand, and clearly convey how users will interact with the app.",
+      "task_image_url": "https://example.com/task_images/task6.jpg"
+    },
+    {
+      "task_title": "Write SEO-Optimized Article on Digital Marketing Trends",
+      "task_detail": "We are looking for an SEO-focused content writer to create a 1000-word article about the top digital marketing strategies for 2025. The article should cover the key areas of digital marketing that will shape the industry in the coming year, such as social media marketing, content marketing, video advertising, AI in marketing, and data-driven strategies. Each section should be informative, offering actionable tips that businesses can implement. The article should be written with SEO best practices in mind, including keyword optimization, proper use of headings, internal linking, and a compelling meta description. Additionally, focus on providing value to the reader by offering real-world examples of successful digital marketing campaigns and providing practical advice.",
+      "required_workers": 4,
+      "payable_amount": 50,
+      "completion_date": "2025-03-08",
+      "submission_info": "Submit the article in Google Docs or Word format. The article should be formatted with headers and subheaders to improve readability. Ensure that you provide citations to reliable sources for any claims or statistics referenced. Use keywords naturally throughout the text to optimize it for search engines.",
+      "task_image_url": "https://example.com/task_images/task7.jpg"
+    }
+  ]
+  

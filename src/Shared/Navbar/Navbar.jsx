@@ -19,11 +19,7 @@ const Navbar = () => {
         
         {
             user ? <>
-            <li><Link to='/cart' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200"> 
-                <button className="btn bg-teal-50">
-                <PiCoinVerticalBold  className="text-yellow-500 text-xl"/>
-                <div className="badge badge-accent">0</div>
-                </button></Link>
+            <li><Link to='/dashboard' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Dashboard</Link>
             </li>
             <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">User Profile</Link></li>
             <button onClick={handleLogOut} className="btn btn-ghost text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Logout</button>

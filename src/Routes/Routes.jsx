@@ -5,6 +5,8 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import RegistrationForm from "../Pages/RegistrationForm/RegistrationForm";
 import LoginForm from "../Pages/LoginForm/LoginForm";
+import Dashboard from "../Layout/Dashboard";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -25,4 +27,13 @@ export const router = createBrowserRouter([
         }
       ]
     },
+    {
+      path : 'dashboard',
+      element : <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
+      children : [
+        {
+          path : 'cart'
+        }
+      ]
+    }
 ]);

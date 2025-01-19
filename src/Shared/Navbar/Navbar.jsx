@@ -19,7 +19,7 @@ const Navbar = () => {
         
         {
             user ? <>
-            <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200"> 
+            <li><Link to='/cart' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200"> 
                 <button className="btn bg-teal-50">
                 <PiCoinVerticalBold  className="text-yellow-500 text-xl"/>
                 <div className="badge badge-accent">0</div>

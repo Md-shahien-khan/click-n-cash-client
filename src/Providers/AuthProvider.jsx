@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import imgLogo from '../assets/images/logo/logo.png'
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import {app} from '../firebase/firebase.config'
 
 // Auth Context
@@ -23,6 +23,7 @@ const spinnerImageStyles = {
 
 // Auth provider
 const AuthProvider = ({children}) => {
+    const googleProvider = new GoogleAuthProvider();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     
@@ -37,6 +38,12 @@ const AuthProvider = ({children}) => {
     const signIn = ( email, password) =>{
         // setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
+    };
+
+    // google sign in
+    const googleSignIn = () =>{
+        // setLoading(true);
+        return signInWithPopup(auth, googleProvider);
     }
 
     // log Out
@@ -50,7 +57,9 @@ const AuthProvider = ({children}) => {
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo
         });
-    }
+    };
+
+
 
     // unsubscribe
     useEffect(() => {
@@ -71,7 +80,8 @@ const AuthProvider = ({children}) => {
         createUser,
         signIn,
         logOut,
-        updateUserProfile
+        updateUserProfile,
+        googleSignIn
     }
     return (
         <AuthContext.Provider value={authInfo}>

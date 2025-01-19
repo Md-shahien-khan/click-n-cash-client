@@ -5,8 +5,11 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { Helmet } from 'react-helmet-async';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginForm = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -62,7 +65,7 @@ const LoginForm = () => {
               <title>Click & Cash | Login</title>
           </Helmet>
           <div className="flex justify-center items-center min-h-screen bg-teal-50">
-              <div className="p-8 shadow-lg w-full max-w-sm lg:h-[600px] bg-teal-100 border border-teal-500">
+              <div className="p-8 shadow-lg w-full max-w-sm lg:h-[630px] bg-teal-100 border border-teal-500">
                   <h2 className="text-2xl font-bold text-teal-800 mb-3">Login</h2>
                   <p className='mb-3'>Please log in your account to access your data.</p>
                   <form onSubmit={handleLogin}>
@@ -77,7 +80,7 @@ const LoginForm = () => {
                               className="w-full p-3 border border-gray-300 rounded-lg mt-2"
                           />
                       </div>
-                      {/* Password */}
+                      {/* Password
                       <div className="mb-4">
                           <label className="block text-gray-700">Password</label>
                           <input
@@ -87,7 +90,29 @@ const LoginForm = () => {
                               required
                               className="w-full p-3 border border-gray-300 rounded-lg mt-2"
                           />
-                      </div>
+                      </div> */}
+
+                      {/* Password */}
+                      <div className="mb-4 relative">
+                            <label className="block text-gray-700">Password</label>
+                            <input
+                                type={passwordVisible ? "text" : "password"}
+                                name="password"
+                                placeholder="Enter your password"
+                                required
+                                className="w-full p-3 border border-gray-300 rounded-lg mt-2"
+                            />
+                            <div
+                                className="absolute top-14 right-3  transform -translate-y-1/2 cursor-pointer"
+                                onClick={() => setPasswordVisible(!passwordVisible)}
+                            >
+                                {passwordVisible ? (
+                                    <FaEyeSlash size={20} />
+                                ) : (
+                                    <FaEye size={20} />
+                                )}
+                            </div>
+                        </div>
                       {/* captcha */}
                       <div className="mb-4">
                           <LoadCanvasTemplate />
@@ -109,12 +134,13 @@ const LoginForm = () => {
                               className={`text-white p-3 w-full rounded-lg ${disabled ? 'bg-teal-50 text-black' : 'bg-teal-500'}`}
                           />
                       </div>
-                      <p>Don't have an account? <Link className='text-red-600' to='/register'>Register</Link></p>
+                      <p>Don't have an account? <Link className='text-red-600 font-semibold' to='/register'>Register</Link></p>
+                      <SocialLogin></SocialLogin>
                   </form>
               </div>
               {/* img */}
               <div className='hidden lg:block'>
-                  <img className='w-[900px] h-full' src={imgLogin} alt="" />
+                  <img className='w-[945px] h-full' src={imgLogin} alt="" />
               </div>
           </div>
       </div>
@@ -122,5 +148,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-

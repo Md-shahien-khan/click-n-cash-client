@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Providers/AuthProvider'; // Assuming AuthContext is setup to handle auth
@@ -7,10 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../hooks/useAxiosPublic'; // Import the useAxiosPublic hook
 import imgLogin from '../../assets/images/homeimg/login.jpg'; // Assuming this is the image
 import axios from 'axios';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const RegistrationForm = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext); // Get createUser from context
   const axiosPublic = useAxiosPublic(); // Initialize axiosPublic
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
@@ -44,7 +46,7 @@ const RegistrationForm = () => {
         .then((response) => {
           if (response.data.insertedId) {
             Swal.fire('Success', 'User registered successfully!', 'success');
-            reset(); // Reset the form fields
+            // reset(); // Reset the form fields
             navigate('/'); // Navigate to the home page after successful registration
           }
         })
@@ -66,9 +68,9 @@ const RegistrationForm = () => {
       <div className="flex justify-center items-center min-h-screen bg-teal-50">
         {/* img */}
         <div className='hidden lg:block'>
-          <img className='w-[1050px] h-full' src={imgLogin} alt="" />
+          <img className='w-[1095px] h-full' src={imgLogin} alt="" />
         </div>
-        <div className="p-8 shadow-lg w-full max-w-sm bg-teal-100 border border-teal-500 h-[700px]">
+        <div className="p-8 shadow-lg w-full max-w-sm bg-teal-100 border border-teal-500 h-[730px]">
           <h2 className="text-2xl font-bold text-teal-800 mb-3">Register</h2>
           <p className='mb-3'>Please fill all the required form to create an account in Click & Cash</p>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -129,27 +131,25 @@ const RegistrationForm = () => {
             </div>
 
             {/* Password */}
-            <div className="mb-4">
-              <label className="block text-gray-700">Password</label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                {...register("password", {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Password should be at least 6 characters long',
-                  },
-                  // pattern: {
-                  //   value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/,
-                  //   message: 'Password should have at least one letter, one number, and one special character',
-                  // },
-                })}
-                className="w-full p-3 border border-gray-300 rounded-lg mt-2"
-              />
-              {errors.password && <span className="text-red-600">{errors.password.message}</span>}
-            </div>
-
+            <div className="mb-4 relative">
+                <label className="block text-gray-700">Password</label>
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    placeholder="Enter your password"
+                    {...register("password", {
+                    required: 'Password is required',
+                    minLength: {
+                      value: 6,
+                      message: 'Password should be at least 6 characters long',
+                      },
+                    })}
+                    className="w-full p-3 border border-gray-300 rounded-lg mt-2"/>
+                    <div className="absolute top-14 right-3 transform -translate-y-1/2 cursor-pointer"
+                      onClick={() => setPasswordVisible(!passwordVisible)}>
+                      {passwordVisible ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                        </div>
+                          {errors.password && <span className="text-red-600">{errors.password.message}</span>}
+                        </div>
             {/* Register Button */}
             <div className="mb-4 text-center">
               <input
@@ -160,7 +160,7 @@ const RegistrationForm = () => {
             </div>
 
             {/* Login Link */}
-            <p className="text-center">Already have an account? <a href="/login" className="text-teal-600">Login</a></p>
+            <p className="text-center">Already have an account? <a href="/login" className="text-red-600 font-semibold">Login</a></p>
           </form>
         </div>
       </div>

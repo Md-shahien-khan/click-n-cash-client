@@ -16,7 +16,6 @@ const MaxCoinWorker = () => {
                 setWorkers(topWorkers);
             });
     }, []);
-
     return (
         <div className="p-6 w-10/12 mx-auto md:my-14">
             <SectionTitle

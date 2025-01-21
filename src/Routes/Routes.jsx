@@ -16,6 +16,7 @@ import PurchaseCoin from '../Pages/Dashboard/PurchaseCoin'
 import TaskList from '../Pages/Dashboard/TaskList'
 import Withdrawals from '../Pages/Dashboard/Withdrawals'
 import AdminRoute from "./AdminRoute";
+import TaskDetails from "../Pages/Dashboard/TaskDetails";
 
 export const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
         {
           path : 'taskList',
           element : <TaskList></TaskList>
+        },
+        {
+          path : 'taskList/:id',
+          element : <TaskDetails></TaskDetails>
         },
         {
           path : 'withdrawals',

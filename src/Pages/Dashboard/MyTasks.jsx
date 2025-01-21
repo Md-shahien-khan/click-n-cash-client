@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { FaTrashAlt } from 'react-icons/fa';
+import { GrUpdate } from 'react-icons/gr';
 
 const MyTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -166,22 +168,24 @@ const MyTasks = () => {
                 .sort((a, b) => new Date(b.completion_date) - new Date(a.completion_date))
                 .map((task) => (
                   <tr key={task._id} className="hover:bg-gray-100">
-                    <td className="px-4 py-2 border">{task.task_title}</td>
+                    <td className="px-4 py-2 border text-teal-600 font-semibold">{task.task_title}</td>
                     <td className="px-4 py-2 border">{task.task_detail}</td>
                     <td className="px-4 py-2 border">{task.submission_info}</td>
                     <td className="px-4 py-2 border text-center">
+                      <div className='flex'>
                       <button
                         onClick={() => handleUpdate(task)}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 mr-2"
-                      >
-                        Update
+                        className="px-4 py-2 text-blue-400 rounded-md t0 mr-2"
+                      > <GrUpdate />
+                        
                       </button>
                       <button
                         onClick={() => handleDelete(task._id)}
-                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-200"
+                        className="px-4 py-2 text-red-400 text-xl rounded-md hover:bg-red-700 "
                       >
-                        Delete
+                        <FaTrashAlt></FaTrashAlt>
                       </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

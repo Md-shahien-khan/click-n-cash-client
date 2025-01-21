@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import imgLogo from '../assets/images/logo/logo.png'
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import {app} from '../firebase/firebase.config'
+import useAxiosPublic from "../hooks/useAxiosPublic";
+
 
 // Auth Context
 export const AuthContext = createContext(null);
@@ -26,6 +28,9 @@ const AuthProvider = ({children}) => {
     const googleProvider = new GoogleAuthProvider();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const axiosPublic = useAxiosPublic();
+
+    // const [role, setRole]= useState('Worker')
     
 
     // create user
@@ -59,19 +64,32 @@ const AuthProvider = ({children}) => {
         });
     };
 
-
-
     // unsubscribe
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser =>{
             setUser(currentUser);
-            console.log('current user', currentUser);
+            if(currentUser){
+                // get token and store client
+                const userInfo = {email: currentUser.email};
+                axiosPublic.post('jwt', userInfo)
+                    .then(res =>{
+                        if(res.data.token){
+                            localStorage.setItem('access-token', res.data.token)
+                        }
+                    })
+            }
+            else{
+                // todo remove token(if token stored in the client side)
+                localStorage.removeItem('access-token');
+            }
             setLoading(false);
         })
         return () =>{
             return unsubscribe();
         }
-    }, []);
+    }, [axiosPublic]);
+
+    // role
 
     // Auth info
     const authInfo = {
@@ -81,7 +99,9 @@ const AuthProvider = ({children}) => {
         signIn,
         logOut,
         updateUserProfile,
-        googleSignIn
+        googleSignIn,
+        // role,
+        // setRole
     }
     return (
         <AuthContext.Provider value={authInfo}>

@@ -54,21 +54,89 @@ const AddNewTasks = () => {
     };
 
     // Handle form submission
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     // Convert `required_workers` and `payable_amount` to numbers
+    //     const taskData = {
+    //         task_title: taskDetails.task_title,
+    //         task_detail: taskDetails.task_detail,
+    //         required_workers: Number(taskDetails.required_workers),  // Ensure it's a number
+    //         payable_amount: Number(taskDetails.payable_amount),      // Ensure it's a number
+    //         completion_date: taskDetails.completion_date,
+    //         submission_info: taskDetails.submission_info,
+    //         task_image_url: taskDetails.task_image_url, // This will be updated after image upload
+    //         email : user?.email
+    //     };
+
+    //     // Upload the image and get the image URL if an image is selected
+    //     let imageUrl = '';
+    //     if (imageFile) {
+    //         try {
+    //             imageUrl = await uploadImage(imageFile);
+    //         } catch (error) {
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Error!',
+    //                 text: 'Failed to upload image. Please try again.',
+    //             });
+    //             return;
+    //         }
+    //     }
+
+    //     // Update task data with the image URL if it was successfully uploaded
+    //     taskData.task_image_url = imageUrl;
+
+    //     try {
+    //         // Send the task data to your backend
+    //         const response = await axios.post('http://localhost:5000/tasks', taskData);
+
+    //         if (response.status === 200) {
+    //             Swal.fire({
+    //                 icon: 'success',
+    //                 title: 'Task Added!',
+    //                 text: 'Your task has been successfully added.',
+    //             });
+
+    //             // Optionally navigate to the task list or home page
+    //             navigate('/');
+    //         } else {
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Error!',
+    //                 text: 'There was an issue adding the task.',
+    //             });
+    //         }
+    //     } catch (err) {
+    //         console.error('Error:', err);
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: 'Error!',
+    //             text: 'There was an error with the task submission.',
+    //         });
+    //     }
+    // };
+
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         // Convert `required_workers` and `payable_amount` to numbers
+        const totalPayableAmount = Number(taskDetails.required_workers) * Number(taskDetails.payable_amount);
+    
+        // Task data
         const taskData = {
             task_title: taskDetails.task_title,
             task_detail: taskDetails.task_detail,
-            required_workers: Number(taskDetails.required_workers),  // Ensure it's a number
-            payable_amount: Number(taskDetails.payable_amount),      // Ensure it's a number
+            required_workers: Number(taskDetails.required_workers),
+            payable_amount: Number(taskDetails.payable_amount),
             completion_date: taskDetails.completion_date,
             submission_info: taskDetails.submission_info,
             task_image_url: taskDetails.task_image_url, // This will be updated after image upload
-            email : user?.email
+            email: user?.email
         };
-
+    
         // Upload the image and get the image URL if an image is selected
         let imageUrl = '';
         if (imageFile) {
@@ -83,29 +151,50 @@ const AddNewTasks = () => {
                 return;
             }
         }
-
+    
         // Update task data with the image URL if it was successfully uploaded
         taskData.task_image_url = imageUrl;
-
+    
         try {
-            // Send the task data to your backend
-            const response = await axios.post('http://localhost:5000/tasks', taskData);
-
-            if (response.status === 200) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Task Added!',
-                    text: 'Your task has been successfully added.',
-                });
-
-                // Optionally navigate to the task list or home page
-                navigate('/');
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'There was an issue adding the task.',
-                });
+            // Fetch the user's data from the backend (to get their current coin balance)
+            const userResponse = await axios.get(`http://localhost:5000/users/${user?.email}`);
+    
+            if (userResponse.status === 200) {
+                const currentCoins = userResponse.data.coins;
+    
+                // Check if the user has enough coins
+                if (totalPayableAmount > currentCoins) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Not enough coins!',
+                        text: 'You do not have enough coins to complete this task. Please purchase more coins.',
+                    });
+    
+                    // Navigate to the Purchase Coin page
+                    navigate('/purchase-coin');
+                    return;
+                } else {
+                    // If the user has enough coins, proceed with adding the task
+                    const taskResponse = await axios.post('http://localhost:5000/tasks', taskData);
+    
+                    if (taskResponse.status === 200) {
+                        // Reduce the user's coins
+                        const updatedCoins = currentCoins - totalPayableAmount;
+    
+                        // Update the user's coins in the userCollection
+                        await axios.patch(`http://localhost:5000/users/coins/${userResponse.data._id}`, { coins: updatedCoins });
+    
+                        // Show success message
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Task Added!',
+                            text: 'Your task has been successfully added.',
+                        });
+    
+                        // Optionally navigate to the task list or home page
+                        navigate('/');
+                    }
+                }
             }
         } catch (err) {
             console.error('Error:', err);
@@ -116,6 +205,7 @@ const AddNewTasks = () => {
             });
         }
     };
+    
 
     return (
         <div className="w-10/12 mx-auto mt-10">

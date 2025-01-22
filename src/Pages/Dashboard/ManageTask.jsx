@@ -6,9 +6,6 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 const ManageTask = () => {
     const [tasks, setTasks] = useState([]);
-
-    // Fetch tasks from the server
-    // Fetch tasks when the component is mounted
     useEffect(() => {
     const fetchTasks = async () => {
       try {

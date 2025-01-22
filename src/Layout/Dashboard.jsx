@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     return (
         <>
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
             {/* dashboard side bar */}
             <div className="w-64 min-h-screen bg-teal-200">
                 <ul className="menu p-4 flex flex-col gap-4">

@@ -11,7 +11,7 @@ const useCoins = () => {
       axios
         .get(`http://localhost:5000/users/${user.email}`)  
         .then((response) => {
-            console.log(response)
+            // console.log(response)
           setCoins(response.data?.coins); 
         })
 

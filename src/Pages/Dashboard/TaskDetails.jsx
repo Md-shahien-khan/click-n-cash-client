@@ -1,104 +1,111 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../../Providers/AuthProvider'; // Import AuthContext
+import { useParams, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
+import Swal from 'sweetalert2'; // Import Swal
 
 const TaskDetails = () => {
-  const { taskId } = useParams(); // Get the task ID from the URL parameter
+  const { id } = useParams(); // Capture task id from the URL
   const [task, setTask] = useState(null);
   const [submissionDetails, setSubmissionDetails] = useState('');
-  const [workerName, setWorkerName] = useState('');
-  
-  // Use AuthContext to get the user info (email, name, etc.)
-  const { user } = useContext(AuthContext); // Access user object from AuthContext
+  const [message, setMessage] = useState('');
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate(); // Use navigate hook
 
+  // Fetch the task details
   useEffect(() => {
-    // Fetch task details using axios
-    axios.get(`http://localhost:5000/tasks/${taskId}`)
+    axios.get(`http://localhost:5000/allTasks/${id}`)
       .then(response => {
-        setTask(response.data); // Set task data
+        setTask(response.data);
       })
       .catch(error => {
-        console.error("There was an error fetching the task details!", error);
+        console.error("There was an error fetching the task!", error);
       });
-  }, [taskId]);
+  }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const workerEmail = user.email; // Replace with actual worker email (from Auth context)
+    const workerName = user.displayName; // Replace with actual worker name (from Auth context)
+    const buyerName = task?.buyer_name || "Buyer Name"; // Assuming the task has a buyer_name field
+    const buyerEmail = task?.buyer_email || "Buyer Email"; // Assuming the task has a buyer_email field
+    const currentDate = new Date().toISOString();
 
-    // Ensure worker's email and buyer's email are retrieved from the user object
-    const workerEmail = user?.email; // Get email from logged-in user
-    const buyerEmail = user?.email; // You can set this dynamically from the buyer
-
-    const currentDate = new Date().toLocaleDateString();
-
-    const submissionData = {
-      task_id: task._id,
-      task_title: task.task_title,
-      payable_amount: task.payable_amount,
-      worker_email: user?.email,
-      worker_name: user?.name,
-      submission_details: submissionDetails,
-      buyer_name: user?.name, // You can set this dynamically
-      buyer_email: user?.email, // You can set this dynamically
-      current_date: currentDate,
-      status: "pending", // Initial status is pending
-    };
-
-    // Send the submission data to the backend using axios
-    axios.post('http://localhost:5000/submissions', submissionData)
-      .then(response => {
-        alert("Submission successful!");
-      })
-      .catch(error => {
-        console.error("There was an error submitting the form!", error);
+    // Submit the submission to the backend
+    try {
+      await axios.post('http://localhost:5000/submissions', {
+        task_id: task._id,
+        task_title: task.task_title,
+        payable_amount: task.payable_amount,
+        worker_email: workerEmail,
+        submission_details: submissionDetails,
+        worker_name: workerName,
+        buyer_name: buyerName,
+        buyer_email: buyerEmail,
+        current_date: currentDate,
+        status: 'pending',
       });
+
+      // Show success Swal
+      Swal.fire({
+        icon: 'success',
+        title: 'Submission Successful!',
+        text: 'Your task submission has been successfully added.',
+        confirmButtonText: 'OK',
+      }).then(() => {
+        navigate('/mySubmissions'); // Redirect to home page after success
+      });
+
+      setSubmissionDetails(''); // Clear the form
+    } catch (error) {
+      console.error("There was an error submitting the form!", error);
+
+      // Show error Swal
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'There was an error submitting your task. Please try again later.',
+        confirmButtonText: 'OK',
+      });
+    }
   };
 
-  if (!task) return <div>Loading task details...</div>;
-
   return (
-    <div className="w-10/12 mx-auto mt-10">
-      <div className="text-center">
-        <h2 className="text-2xl font-semibold">{task.task_title}</h2>
-        <p className="mt-2">Complete the task by submitting your details below.</p>
-      </div>
-
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold">Task Information</h3>
-        <p><strong>Task Description:</strong> {task.description}</p>
-        <p><strong>Completion Date:</strong> {task.completion_date}</p>
-        <p><strong>Payable Amount:</strong> ${task.payable_amount}</p>
-        <p><strong>Required Workers:</strong> {task.required_workers}</p>
-      </div>
-
-      {/* Submission Form */}
-      <form onSubmit={handleSubmit} className="mt-6">
+    <div className="w-10/12 mx-auto">
+      {task ? (
         <div>
-          <label htmlFor="workerName" className="block">Your Name</label>
-          <input
-            type="text"
-            id="workerName"
-            value={workerName}
-            onChange={(e) => setWorkerName(e.target.value)}
-            required
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
+          <h2 className="text-xl md:text-4xl font-semibold text-teal-950">{task.task_title}</h2>
+          <div className="bg-white p-5 rounded shadow-md">
+            <img src={task.task_image_url} alt={task.task_title} className="w-full h-64 object-cover mb-4" />
+            <p><strong>Buyer Name:</strong> {task.buyer_name}</p>
+            <p><strong>Completion Date:</strong> {task.completion_date}</p>
+            <p><strong>Payable Amount:</strong> ${task.payable_amount}</p>
+            <p><strong>Required Workers:</strong> {task.required_workers}</p>
+            <p><strong>Task Description:</strong> {task.task_detail}</p>
+          </div>
 
-        <div className="mt-4">
-          <label htmlFor="submissionDetails" className="block">Submission Details</label>
-          <textarea
-            id="submissionDetails"
-            value={submissionDetails}
-            onChange={(e) => setSubmissionDetails(e.target.value)}
-            required
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+          <h3 className="mt-8 text-lg font-semibold">Submit Your Task</h3>
+          <form onSubmit={handleSubmit} className="mt-4">
+            <textarea
+              value={submissionDetails}
+              onChange={(e) => setSubmissionDetails(e.target.value)}
+              className="w-full h-32 p-3 border border-gray-300 rounded-md"
+              placeholder="Write your submission details here..."
+            />
+            <button
+              type="submit"
+              className="mt-4 w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Submit Task
+            </button>
+          </form>
+          
+          {message && <p className="mt-4 text-green-500">{message}</p>}
         </div>
-
-        <button type="submit" className="mt-4 w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Submit</button>
-      </form>
+      ) : (
+        <p>Loading task details...</p>
+      )}
     </div>
   );
 };

@@ -94,6 +94,51 @@ const MyTasks = () => {
     }
   };
 
+  // const handleDelete = async (id, requiredWorkers, payableAmount) => {
+  //   // Calculate the refund amount (required_workers * payable_amount)
+  //   const refundAmount = requiredWorkers * payableAmount;
+  
+  //   const confirmDelete = await Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: 'You will not be able to recover this task!',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Yes, delete it!',
+  //     cancelButtonText: 'Cancel',
+  //   });
+  
+  //   if (confirmDelete.isConfirmed) {
+  //       // 1. Delete the task from the tasks collection
+  //       const response = await axios.delete(`http://localhost:5000/tasks/${id}`, {refundAmount});
+  //       console.log(response)
+  //       if (response.status === 200) {
+  //         Swal.fire('Deleted!', 'Your task has been deleted.', 'success');
+  
+  //         // // 2. Get user details to check the current coin balance
+  //         // // const userResponse = await axios.get(`http://localhost:5000/users/${user?.email}`);
+          
+  //         // if (userResponse.data) {
+  //         //   const user = userResponse.data;
+  
+  //         //   // 3. Increase user's coins for uncompleted tasks
+  //         //   if (user && user.coins !== undefined) {
+  //         //     const updatedCoins = user.coins + refundAmount;
+  //         //     console.log(updatedCoins)
+  //         //     // 4. Update the user's coin balance in the user collection
+  //         //     const updateUserResponse = await axios.patch(`http://localhost:5000/users/${id}?email=${user?.email}`, {                
+  //         //       coins: updatedCoins,
+  //         //     });
+  
+  //         //     console.log(`User's coins updated to: ${updatedCoins}`);
+  //         //   }
+  //         // }
+  //         // 5. Remove the task from the UI state
+  //         setTasks(tasks.filter((task) => task._id !== id));
+  //       }
+  //   }
+  // };
+  
+
   return (
     <div className="container mx-auto p-4 md:p-8">
       <h2 className="text-center text-2xl md:text-3xl font-semibold text-teal-950 mb-6">My Tasks</h2>

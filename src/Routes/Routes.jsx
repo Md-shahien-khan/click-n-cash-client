@@ -6,17 +6,17 @@ import Home from "../Pages/Home/Home/Home";
 import RegistrationForm from "../Pages/RegistrationForm/RegistrationForm";
 import LoginForm from "../Pages/LoginForm/LoginForm";
 import Dashboard from "../Layout/Dashboard";
-import PrivateRoutes from "./PrivateRoutes";
+// import PrivateRoutes from "./PrivateRoutes";
 import AddNewTasks from '../Pages/Dashboard/AddNewTasks'
 import ManageTask from '../Pages/Dashboard/ManageTask'
 import ManageUsers from '../Pages/Dashboard/ManageUsers'
 import MySubmissions from '../Pages/Dashboard/MySubmissions'
 import MyTasks from '../Pages/Dashboard/MyTasks'
-import PurchaseCoin from '../Pages/Dashboard/PurchaseCoin'
 import TaskList from '../Pages/Dashboard/TaskList'
 import Withdrawals from '../Pages/Dashboard/Withdrawals'
-import AdminRoute from "./AdminRoute";
+// import AdminRoute from "./AdminRoute";
 import TaskDetails from "../Pages/Dashboard/TaskDetails";
+
 
 export const router = createBrowserRouter([
     {
@@ -62,16 +62,13 @@ export const router = createBrowserRouter([
           element : <MyTasks></MyTasks>
         },
         {
-          path : 'purchaseCoin',
-          element : <PurchaseCoin></PurchaseCoin>
-        },
-        {
           path : 'taskList',
           element : <TaskList></TaskList>
         },
         {
-          path : 'taskList/:id',
-          element : <TaskDetails></TaskDetails>
+          path : 'taskList/taskDetails/:id',
+          element : <TaskDetails></TaskDetails>,
+          loader: ({ params }) => fetch(`http://localhost:5000/allTasks/${params.id}`)
         },
         {
           path : 'withdrawals',

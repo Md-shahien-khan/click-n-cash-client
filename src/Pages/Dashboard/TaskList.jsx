@@ -6,9 +6,10 @@ import { AuthContext } from '../../Providers/AuthProvider';
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const {user} = useContext(AuthContext);
+  console.log(user)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/tasks')
+    axios.get('http://localhost:5000/allTasks')
       .then(response => {
         setTasks(response.data);
       })
@@ -32,18 +33,15 @@ const TaskList = () => {
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Task Title: <span className="font-medium text-blue-600">{eachTask.task_title}</span>
               </h2>
-              <p className="text-sm text-gray-600 mb-2"><strong>Buyer Name:</strong> 'Buyer name need to add'</p>
+              <p className="text-sm text-gray-600 mb-2"><strong>Buyer Name:</strong> {user.displayName
+              }</p>
               <p className="text-sm text-gray-600 mb-2"><strong>Completion Date:</strong> {eachTask.completion_date}</p>
               <p className="text-sm text-gray-600 mb-2"><strong>Payable Amount:</strong> ${eachTask.payable_amount}</p>
               <p className="text-sm text-gray-600 mb-4"><strong>Required Workers:</strong> {eachTask.required_workers}</p>
 
-              {/* View Details button */}
               <Link
-                to={`/tasks/${eachTask._id}`} 
-                className="block w-full text-center py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
-              >
-                View Details
-              </Link>
+              to={`taskDetails/${eachTask._id}`} 
+              className="block w-full text-center py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">View Details</Link>
             </div>
           </div>
         ))}

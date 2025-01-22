@@ -24,7 +24,7 @@ const Dashboard = () => {
         <>
         <div className="flex flex-col md:flex-row">
             {/* dashboard side bar */}
-            <div className="w-64 min-h-screen bg-teal-200">
+            <div className="w-full md:w-64 md:min-h-screen bg-teal-200">
                 <ul className="menu p-4 flex flex-col gap-4">
                     <div className="">
                         <img src={logo} className="w-32" alt="Logo" />

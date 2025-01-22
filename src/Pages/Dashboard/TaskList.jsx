@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for routing
-import axios from 'axios'; // Import axios
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; 
+import axios from 'axios'; 
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
+  const {user} = useContext(AuthContext);
 
   useEffect(() => {
-    // Use axios to fetch task data
     axios.get('http://localhost:5000/tasks')
       .then(response => {
-        setTasks(response.data); // Set task data
+        setTasks(response.data);
       })
       .catch(error => {
         console.error("There was an error fetching the tasks!", error);
@@ -22,7 +23,6 @@ const TaskList = () => {
         <h2 className="text-xl md:text-4xl font-semibold text-teal-950">Tasks</h2>
         <p className="px-4 text-teal-900">Start earning money by completing simple tasks like clicking ads and surveys.</p>
       </div>
-
       {/* task card */}
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-3 mt-5 md:mt-10">
         {tasks.map(eachTask => (
@@ -32,14 +32,14 @@ const TaskList = () => {
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Task Title: <span className="font-medium text-blue-600">{eachTask.task_title}</span>
               </h2>
-              <p className="text-sm text-gray-600 mb-2"><strong>Buyer Name:</strong> shawon</p>
+              <p className="text-sm text-gray-600 mb-2"><strong>Buyer Name:</strong> 'Buyer name need to add'</p>
               <p className="text-sm text-gray-600 mb-2"><strong>Completion Date:</strong> {eachTask.completion_date}</p>
               <p className="text-sm text-gray-600 mb-2"><strong>Payable Amount:</strong> ${eachTask.payable_amount}</p>
               <p className="text-sm text-gray-600 mb-4"><strong>Required Workers:</strong> {eachTask.required_workers}</p>
 
               {/* View Details button */}
               <Link
-                to={`/tasks/${eachTask._id}`} // Link to TaskDetails page with task ID
+                to={`/tasks/${eachTask._id}`} 
                 className="block w-full text-center py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
               >
                 View Details

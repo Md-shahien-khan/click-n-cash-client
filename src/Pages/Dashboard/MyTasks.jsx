@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { FaTrashAlt } from 'react-icons/fa';
 import { GrUpdate } from 'react-icons/gr';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const MyTasks = () => {
+  const {user} = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-
+  console.log(tasks);
   // Fetch tasks when the component is mounted
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/tasks');
+        const response = await axios.get(`http://localhost:5000/tasks/${user?.email}`);
         setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -177,7 +179,6 @@ const MyTasks = () => {
                         onClick={() => handleUpdate(task)}
                         className="px-4 py-2 text-blue-400 rounded-md t0 mr-2"
                       > <GrUpdate />
-                        
                       </button>
                       <button
                         onClick={() => handleDelete(task._id)}

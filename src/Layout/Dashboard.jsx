@@ -7,15 +7,21 @@ import logo from '../assets/images/logo/logo.png';
 import { AuthContext } from "../Providers/AuthProvider";
 import { useContext } from "react";
 import useAdmin from "../hooks/useAdmin";
+import useCoins from "../hooks/useCoins";
 
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
-    const [isAdmin] = useAdmin();  
-    const isBuyer = true; 
-    const isWorker = true; 
+    const [role, isAdminLoading] = useAdmin();  
+    const {coins} = useCoins();
+    // const isBuyer = true; 
+    // const isWorker = true; 
+    if(isAdminLoading){
+        return <h2>loading.................</h2>
+    }
 
     return (
+        <>
         <div className="flex">
             {/* dashboard side bar */}
             <div className="w-64 min-h-screen bg-teal-200">
@@ -25,7 +31,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Admin navigation */}
-                    {isAdmin && (
+                    {role == 'admin' && (
                         <>
                             <li className="bg-teal-950 rounded-md text-white">
                                 <NavLink to="/dashboard/manageUsers">
@@ -41,7 +47,7 @@ const Dashboard = () => {
                     )}
 
                     {/* Buyer navigation */}
-                    {isBuyer && (
+                    {role == 'buyer' && (
                         <>
                             <li className="bg-teal-950 rounded-md text-white">
                                 <NavLink to="/dashboard/addNewTasks">
@@ -62,7 +68,7 @@ const Dashboard = () => {
                     )}
 
                     {/* Worker navigation */}
-                    {isWorker && (
+                    {role == 'worker' && (
                         <>
                             <li className="bg-teal-950 rounded-md text-white">
                                 <NavLink to="/dashboard/taskList">
@@ -94,9 +100,20 @@ const Dashboard = () => {
 
             {/* Content area */}
             <div className="flex-1">
+            <div className="divider"></div>
+                <div className="flex justify-center items-center gap-4">
+                    <img className="w-24" src={user.photoURL} alt="" />
+                    <div className="text-xl text-teal-700">
+                        <h2>{user.email}</h2>
+                        <p>Available Coins : {coins}</p>
+                        <p>Role : {role}</p>
+                    </div>
+                </div>
+            <div className="divider"></div>
                 <Outlet />
             </div>
         </div>
+        </>
     );
 };
 

@@ -3,6 +3,8 @@ import imgLogo from '../assets/images/logo/logo.png'
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import {app} from '../firebase/firebase.config'
 import useAxiosPublic from "../hooks/useAxiosPublic";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
 
 
 // Auth Context
@@ -26,12 +28,36 @@ const spinnerImageStyles = {
 // Auth provider
 const AuthProvider = ({children}) => {
     const googleProvider = new GoogleAuthProvider();
+    // const [coins, setCoins] = useState(0);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const axiosPublic = useAxiosPublic();
 
-    // const [role, setRole]= useState('Worker')
-    
+    // // Query to fetch user's coins
+    // const { data, refetch } = useQuery({
+    //     queryKey: ['users', user?.email],
+    //     queryFn: async () => {
+    //         try {
+    //             // API call to get user data
+    //             const res = await axiosPublic.get(`http://localhost:5000/users/${user?.email}`);
+    //             console.log('API response:', res); // Log the full API response
+
+    //             // Check if the structure is as expected
+    //             if (res.data && res.data.user && res.data.user.coins !== undefined) {
+    //                 // If valid, set coins state and return coins
+    //                 setCoins(res.data.user.coins);
+    //                 return res.data.user.coins;
+    //             } else {
+    //                 throw new Error('Coins not found in response');
+    //             }
+    //         } catch (error) {
+    //             // If error occurs, log and return a default value
+    //             console.error('API request failed:', error);
+    //             return 0; // Return a default value
+    //         }
+    //     },
+    //     enabled: !!user?.email, // Ensure query only runs when there's a valid user email
+    // });
 
     // create user
     const createUser = (email, password) =>{
@@ -67,22 +93,25 @@ const AuthProvider = ({children}) => {
     // unsubscribe
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser =>{
-            setUser(currentUser);
+            
             if(currentUser){
                 // get token and store client
-                const userInfo = {email: currentUser.email};
-                axiosPublic.post('jwt', userInfo)
-                    .then(res =>{
-                        if(res.data.token){
-                            localStorage.setItem('access-token', res.data.token)
-                        }
-                    })
+                // const userInfo = {email: currentUser.email};
+                // axiosPublic.post(userInfo)
+                //     .then(res =>{
+                //         if(res.data.token){
+                //             localStorage.setItem('access-token', res.data.token)
+                //         }
+                //     })
+                setUser(currentUser);
+            setLoading(false);
             }
             else{
                 // todo remove token(if token stored in the client side)
-                localStorage.removeItem('access-token');
+                // localStorage.removeItem('access-token');
+                setUser(currentUser);
+                setLoading(false);
             }
-            setLoading(false);
         })
         return () =>{
             return unsubscribe();
@@ -100,8 +129,7 @@ const AuthProvider = ({children}) => {
         logOut,
         updateUserProfile,
         googleSignIn,
-        // role,
-        // setRole
+        // coins
     }
     return (
         <AuthContext.Provider value={authInfo}>

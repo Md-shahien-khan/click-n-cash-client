@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
     },
     {
       path : '/dashboard',
-      element : <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
+      element : <Dashboard></Dashboard>,
       children : [
         {
           path : 'addNewTasks',

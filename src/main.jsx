@@ -16,15 +16,15 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
     <QueryClientProvider client={queryClient}>
+    <AuthProvider>
         {/* React Helmet */}
         <HelmetProvider>
         <div className='w-full mx-auto'>
           <RouterProvider router={router} />
         </div>
       </HelmetProvider>
-    </QueryClientProvider>
     </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )

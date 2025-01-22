@@ -3,8 +3,11 @@ import logo from '../../assets/images/logo/logo.png'
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { PiCoinVerticalBold } from "react-icons/pi";
+import useCoins from "../../hooks/useCoins";
 const Navbar = () => {
     const {user, logOut} = useContext(AuthContext);
+    const {coins} = useCoins();
+    // console.log(user ,coins)
 
     // Log out
     const handleLogOut = () =>{
@@ -21,6 +24,7 @@ const Navbar = () => {
             user ? <>
             <li><Link to='/dashboard' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Dashboard</Link>
             </li>
+            <li><button to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200 bg-teal-500">Available Coin {coins}<PiCoinVerticalBold className="text-yellow-600" /></button></li>
             <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">User Profile</Link></li>
             <button onClick={handleLogOut} className="btn btn-ghost text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Logout</button>
             </> : <>

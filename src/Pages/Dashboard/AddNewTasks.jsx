@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';  // Import SweetAlert2
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const AddNewTasks = () => {
+    const {user} = useContext(AuthContext);
     const [taskDetails, setTaskDetails] = useState({
         task_title: '',
         task_detail: '',
@@ -64,6 +66,7 @@ const AddNewTasks = () => {
             completion_date: taskDetails.completion_date,
             submission_info: taskDetails.submission_info,
             task_image_url: taskDetails.task_image_url, // This will be updated after image upload
+            email : user?.email
         };
 
         // Upload the image and get the image URL if an image is selected

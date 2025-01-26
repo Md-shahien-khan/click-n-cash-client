@@ -3,6 +3,7 @@ import Banner from "../../Banner/Banner";
 import Testimonials from "../../Testimonials/Testimonials";
 import AboutSection from "../AboutSection/AboutSection";
 import MaxCoinWorker from "../../MaxCoinWorker/MaxCoinWorker";
+import Qa from "../Qa/Qa";
 
 // Home
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
             <AboutSection></AboutSection>   
             <MaxCoinWorker></MaxCoinWorker>
             <Testimonials></Testimonials>
+            <Qa></Qa>
         </div>
     );
 };

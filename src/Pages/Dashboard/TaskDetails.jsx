@@ -2,15 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
-import Swal from 'sweetalert2'; // Import Swal
+import Swal from 'sweetalert2'; 
 
 const TaskDetails = () => {
-  const { id } = useParams(); // Capture task id from the URL
+  const { id } = useParams(); 
   const [task, setTask] = useState(null);
   const [submissionDetails, setSubmissionDetails] = useState('');
   const [message, setMessage] = useState('');
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate(); // Use navigate hook
+  const navigate = useNavigate(); 
 
   // Fetch the task details
   useEffect(() => {
@@ -26,10 +26,10 @@ const TaskDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const workerEmail = user.email; // Replace with actual worker email (from Auth context)
-    const workerName = user.displayName; // Replace with actual worker name (from Auth context)
-    const buyerName = task?.buyer_name || "Buyer Name"; // Assuming the task has a buyer_name field
-    const buyerEmail = task?.buyer_email || "Buyer Email"; // Assuming the task has a buyer_email field
+    const workerEmail = user.email; 
+    const workerName = user.displayName; 
+    const buyerName = task?.buyer_name || "Buyer Name"; 
+    const buyerEmail = task?.buyer_email || "Buyer Email";
     const currentDate = new Date().toISOString();
 
     // Submit the submission to the backend
@@ -47,21 +47,20 @@ const TaskDetails = () => {
         status: 'pending',
       });
 
-      // Show success Swal
+
       Swal.fire({
         icon: 'success',
         title: 'Submission Successful!',
         text: 'Your task submission has been successfully added.',
         confirmButtonText: 'OK',
       }).then(() => {
-        navigate('/mySubmissions'); // Redirect to home page after success
+        navigate('/'); 
       });
 
-      setSubmissionDetails(''); // Clear the form
+      setSubmissionDetails(''); 
     } catch (error) {
       console.error("There was an error submitting the form!", error);
 
-      // Show error Swal
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

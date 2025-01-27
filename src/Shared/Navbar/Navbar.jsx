@@ -18,7 +18,7 @@ const Navbar = () => {
 
     const navOptions = <>
         <li><Link to='/' className="text-xl text-teal-200 font-semibold hover:text-teal-400 transition duration-200">Home</Link></li>
-        <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Join as Developer</Link></li>
+        <li><Link to='https://www.linkedin.com/in/md-shahien-khan-a46275229/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Join as Developer</Link></li>
         
         {
             user ? <>

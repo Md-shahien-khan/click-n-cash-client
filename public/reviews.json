@@ -1,35 +1,35 @@
 [
     {
       "name": "John Doe",
-      "photo": "https://i.ibb.co/M8G4Yyr/portrait-man-looking-front-him.jpg",
+      "photo": "https://i.ibb.co/vmmHSTm/men1.jpg",
       "role": "Buyer",
       "quote": "Finding skilled workers has never been this easy!",
       "rating": 5
     },
     {
       "name": "Jane Smith",
-      "photo": "https://i.ibb.co/PGLZ3zw/young-man-wearing-chain-necklace-1.jpg",
+      "photo": "https://i.ibb.co/h7zsDQj/men2.jpg",
       "role": "Worker",
       "quote": "Click and Cash helped me land consistent work!",
       "rating": 5
     },
     {
       "name": "Ali Khan",
-      "photo": "https://i.ibb.co/r4KyZps/teenager-boy-portrait.jpg",
+      "photo": "https://i.ibb.co/kG8CwDs/men3.jpg",
       "role": "Buyer",
       "quote": "The freelancers here deliver top-notch results!",
       "rating": 4
     },
     {
       "name": "Emily Brown",
-      "photo": "https://i.ibb.co/QbbR8cs/young-bearded-man-black-shirt-looking-camera-surprised.jpg",
+      "photo": "https://i.ibb.co/5Yqpf6B/wmn1.jpg",
       "role": "Worker",
       "quote": "Payments are fast, and the platform is easy to use!",
       "rating": 5
     },
     {
       "name": "Carlos Martinez",
-      "photo": "https://i.ibb.co/KwDqtFG/person2.jpg",
+      "photo": "https://i.ibb.co/CBNcsZm/men-4.jpg",
       "role": "Buyer",
       "quote": "Quickly connected with professionals for my project.",
       "rating": 4
@@ -43,28 +43,28 @@
     },
     {
       "name": "James Anderson",
-      "photo": "https://i.ibb.co/KwDqtFG/person2.jpg",
+      "photo": "https://i.ibb.co/v1DdyYX/men5.jpg",
       "role": "Buyer",
       "quote": "The hiring process is so smooth and reliable!",
       "rating": 5
     },
     {
       "name": "Mia Wang",
-      "photo": "https://i.ibb.co/KwDqtFG/person2.jpg",
+      "photo": "https://i.ibb.co/m0HbT6c/wmn2.jpg",
       "role": "Worker",
       "quote": "I’ve built great relationships with buyers here.",
       "rating": 5
     },
     {
       "name": "Daniel Kim",
-      "photo": "https://i.ibb.co/KwDqtFG/person2.jpg",
+      "photo": "https://i.ibb.co/fxBb8Dj/wmn4.png",
       "role": "Buyer",
       "quote": "Click and Cash is my go-to platform for projects.",
       "rating": 5
     },
     {
       "name": "Aisha Ahmed",
-      "photo": "https://i.ibb.co/KwDqtFG/person2.jpg",
+      "photo": "https://i.ibb.co/hFRGrc6/wmn3.jpg",
       "role": "Worker",
       "quote": "It’s been a blessing for my freelance career!",
       "rating": 5

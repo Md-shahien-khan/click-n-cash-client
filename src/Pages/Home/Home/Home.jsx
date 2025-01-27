@@ -4,6 +4,7 @@ import Testimonials from "../../Testimonials/Testimonials";
 import AboutSection from "../AboutSection/AboutSection";
 import MaxCoinWorker from "../../MaxCoinWorker/MaxCoinWorker";
 import Qa from "../Qa/Qa";
+import DownloadApp from "../../DownloadApp/DownloadApp";
 
 // Home
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
             <AboutSection></AboutSection>   
             <MaxCoinWorker></MaxCoinWorker>
             <Testimonials></Testimonials>
+            <DownloadApp></DownloadApp>
             <Qa></Qa>
         </div>
     );

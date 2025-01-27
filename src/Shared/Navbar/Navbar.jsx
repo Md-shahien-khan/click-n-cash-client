@@ -30,7 +30,7 @@ const Navbar = () => {
             </> : <>
             <li><Link to='/login' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Login</Link></li>
             <li><Link to='/register' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Register</Link></li>
-        <li><Link to='https://github.com/Md-shahien-khan?tab=repositories' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Join as Developer</Link></li>
+            {/* <li><Link to='https://github.com/Md-shahien-khan?tab=repositories' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Join as Developer</Link></li> */}
             <li><Link to='' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Join as Developer</Link></li>
             </>
         }

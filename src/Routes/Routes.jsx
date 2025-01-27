@@ -69,7 +69,7 @@ export const router = createBrowserRouter([
         {
           path : 'taskList/taskDetails/:id',
           element : <TaskDetails></TaskDetails>,
-          loader: ({ params }) => fetch(`http://localhost:5000/allTasks/${params.id}`)
+          loader: ({ params }) => fetch(`https://click-n-cash-server.vercel.app/allTasks/${params.id}`)
         },
         {
           path : 'purchaseCoin',

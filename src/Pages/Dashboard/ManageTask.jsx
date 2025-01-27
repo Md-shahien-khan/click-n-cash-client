@@ -9,7 +9,7 @@ const ManageTask = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/allTasks`);
+        const response = await axios.get(`https://click-n-cash-server.vercel.app/allTasks`);
         setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -32,7 +32,7 @@ const ManageTask = () => {
 
     if (confirmDelete.isConfirmed) {
       try {
-        const response = await axios.delete(`http://localhost:5000/allTasks/${id}`);
+        const response = await axios.delete(`https://click-n-cash-server.vercel.app/allTasks/${id}`);
         if (response.status === 200) {
           Swal.fire('Deleted!', 'Your task has been deleted.', 'success');
           setTasks(tasks.filter((task) => task._id !== id));

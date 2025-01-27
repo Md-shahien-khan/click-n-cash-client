@@ -9,7 +9,7 @@
 //   useEffect(() => {
 //     if (user) {
 //       axios
-//         .get(`http://localhost:5000/users/${user.role}`)  
+//         .get(`https://click-n-cash-server.vercel.app/users/${user.role}`)  
 //         .then((response) => {
 //             // console.log(response)
 //           setCoins(response.data?.coins); 

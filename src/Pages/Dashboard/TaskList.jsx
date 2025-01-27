@@ -9,7 +9,7 @@ const TaskList = () => {
   console.log(user)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/allTasks')
+    axios.get('https://click-n-cash-server.vercel.app/allTasks')
       .then(response => {
         setTasks(response.data);
       })
@@ -88,7 +88,7 @@ export default TaskList;
 //     // const {tasks} = useTask();
 //     const [task, setTask] = useState([]);
 //     useEffect(() => {
-//         fetch('http://localhost:5000/tasks')
+//         fetch('https://click-n-cash-server.vercel.app/tasks')
 //         .then(res => res.json())
 //         .then(data => {
 //                 setTask(data);

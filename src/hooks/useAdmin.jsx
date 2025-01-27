@@ -9,7 +9,7 @@ const useAdmin = () => {
     const {data : role, isLoading: isAdminLoading} = useQuery({
         queryKey : [user?.email, 'users'],
         queryFn : async() =>{
-            const res = await axios.get(`http://localhost:5000/users/${user?.email}`);
+            const res = await axios.get(`https://click-n-cash-server.vercel.app/users/${user?.email}`);
             // console.log(res);
             return res.data?.role;
         }

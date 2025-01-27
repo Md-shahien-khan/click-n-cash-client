@@ -6,7 +6,7 @@ const MaxCoinWorker = () => {
     const [workers, setWorkers] = useState([]);
     
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('https://click-n-cash-server.vercel.app/users')
             .then(res => res.json())
             .then(data => {
                 // Filter workers who have the role 'worker'
@@ -74,7 +74,7 @@ export default MaxCoinWorker;
 //     const [worker, setWorker] = useState([]);
     
 //     useEffect(() => {
-//         fetch('http://localhost:5000/users')
+//         fetch('https://click-n-cash-server.vercel.app/users')
 //             .then(res => res.json())
 //             .then(data => {
 //                 setWorker(data);

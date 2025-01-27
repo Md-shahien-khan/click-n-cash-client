@@ -15,7 +15,7 @@ const MyTasks = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/tasks/${user?.email}`);
+        const response = await axios.get(`https://click-n-cash-server.vercel.app/tasks/${user?.email}`);
         setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -52,7 +52,7 @@ const MyTasks = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/tasks/${selectedTask._id}`,
+        `https://click-n-cash-server.vercel.app/tasks/${selectedTask._id}`,
         updatedTask
       );
 
@@ -83,7 +83,7 @@ const MyTasks = () => {
 
     if (confirmDelete.isConfirmed) {
       try {
-        const response = await axios.delete(`http://localhost:5000/tasks/${id}`);
+        const response = await axios.delete(`https://click-n-cash-server.vercel.app/tasks/${id}`);
         if (response.status === 200) {
           Swal.fire('Deleted!', 'Your task has been deleted.', 'success');
           setTasks(tasks.filter((task) => task._id !== id));
@@ -109,13 +109,13 @@ const MyTasks = () => {
   
   //   if (confirmDelete.isConfirmed) {
   //       // 1. Delete the task from the tasks collection
-  //       const response = await axios.delete(`http://localhost:5000/tasks/${id}`, {refundAmount});
+  //       const response = await axios.delete(`https://click-n-cash-server.vercel.app/tasks/${id}`, {refundAmount});
   //       console.log(response)
   //       if (response.status === 200) {
   //         Swal.fire('Deleted!', 'Your task has been deleted.', 'success');
   
   //         // // 2. Get user details to check the current coin balance
-  //         // // const userResponse = await axios.get(`http://localhost:5000/users/${user?.email}`);
+  //         // // const userResponse = await axios.get(`https://click-n-cash-server.vercel.app/users/${user?.email}`);
           
   //         // if (userResponse.data) {
   //         //   const user = userResponse.data;
@@ -125,7 +125,7 @@ const MyTasks = () => {
   //         //     const updatedCoins = user.coins + refundAmount;
   //         //     console.log(updatedCoins)
   //         //     // 4. Update the user's coin balance in the user collection
-  //         //     const updateUserResponse = await axios.patch(`http://localhost:5000/users/${id}?email=${user?.email}`, {                
+  //         //     const updateUserResponse = await axios.patch(`https://click-n-cash-server.vercel.app/users/${id}?email=${user?.email}`, {                
   //         //       coins: updatedCoins,
   //         //     });
   

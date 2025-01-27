@@ -14,7 +14,7 @@ const TaskDetails = () => {
 
   // Fetch the task details
   useEffect(() => {
-    axios.get(`http://localhost:5000/allTasks/${id}`)
+    axios.get(`https://click-n-cash-server.vercel.app/allTasks/${id}`)
       .then(response => {
         setTask(response.data);
       })
@@ -34,7 +34,7 @@ const TaskDetails = () => {
 
     // Submit the submission to the backend
     try {
-      await axios.post('http://localhost:5000/submissions', {
+      await axios.post('https://click-n-cash-server.vercel.app/submissions', {
         task_id: task._id,
         task_title: task.task_title,
         payable_amount: task.payable_amount,

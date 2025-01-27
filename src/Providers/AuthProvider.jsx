@@ -39,7 +39,7 @@ const AuthProvider = ({children}) => {
     //     queryFn: async () => {
     //         try {
     //             // API call to get user data
-    //             const res = await axiosPublic.get(`http://localhost:5000/users/${user?.email}`);
+    //             const res = await axiosPublic.get(`https://click-n-cash-server.vercel.app/users/${user?.email}`);
     //             console.log('API response:', res); // Log the full API response
 
     //             // Check if the structure is as expected

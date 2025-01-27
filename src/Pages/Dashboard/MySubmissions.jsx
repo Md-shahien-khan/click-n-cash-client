@@ -4,7 +4,7 @@ const MySubmissions = () => {
     const [submissions, setSubmissions] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/allSubmissions')
+        fetch('https://click-n-cash-server.vercel.app/allSubmissions')
             .then(res => res.json())
             .then(data => setSubmissions(data));
     }, []);

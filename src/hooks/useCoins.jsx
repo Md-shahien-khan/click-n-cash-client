@@ -9,7 +9,7 @@ const useCoins = () => {
   useEffect(() => {
     if (user) {
       axios
-        .get(`http://localhost:5000/users/${user.email}`)  
+        .get(`https://click-n-cash-server.vercel.app/users/${user.email}`)  
         .then((response) => {
             // console.log(response)
           setCoins(response.data?.coins); 

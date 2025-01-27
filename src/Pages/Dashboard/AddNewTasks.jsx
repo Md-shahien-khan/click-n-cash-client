@@ -87,7 +87,7 @@ const AddNewTasks = () => {
         taskData.task_image_url = imageUrl;
     
         try {
-            const userResponse = await axios.get(`http://localhost:5000/users/${user?.email}`);
+            const userResponse = await axios.get(`https://click-n-cash-server.vercel.app/users/${user?.email}`);
     
             if (userResponse.status === 200) {
                 const currentCoins = userResponse.data.coins;
@@ -105,14 +105,14 @@ const AddNewTasks = () => {
                     return;
                 } else {
                     // If the user has enough coins, proceed with adding the task
-                    const taskResponse = await axios.post('http://localhost:5000/tasks', taskData);
+                    const taskResponse = await axios.post('https://click-n-cash-server.vercel.app/tasks', taskData);
     
                     if (taskResponse.status === 200) {
                         // Reduce the user's coins
                         const updatedCoins = currentCoins - totalPayableAmount;
     
                         // Update the user's coins in the userCollection
-                        await axios.patch(`http://localhost:5000/users/coins/${userResponse.data._id}`, { coins: updatedCoins });
+                        await axios.patch(`https://click-n-cash-server.vercel.app/users/coins/${userResponse.data._id}`, { coins: updatedCoins });
     
                         // Show success message
                         Swal.fire({

@@ -53,76 +53,9 @@ const AddNewTasks = () => {
         }
     };
 
-    // Handle form submission
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     // Convert `required_workers` and `payable_amount` to numbers
-    //     const taskData = {
-    //         task_title: taskDetails.task_title,
-    //         task_detail: taskDetails.task_detail,
-    //         required_workers: Number(taskDetails.required_workers),  // Ensure it's a number
-    //         payable_amount: Number(taskDetails.payable_amount),      // Ensure it's a number
-    //         completion_date: taskDetails.completion_date,
-    //         submission_info: taskDetails.submission_info,
-    //         task_image_url: taskDetails.task_image_url, // This will be updated after image upload
-    //         email : user?.email
-    //     };
-
-    //     // Upload the image and get the image URL if an image is selected
-    //     let imageUrl = '';
-    //     if (imageFile) {
-    //         try {
-    //             imageUrl = await uploadImage(imageFile);
-    //         } catch (error) {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Error!',
-    //                 text: 'Failed to upload image. Please try again.',
-    //             });
-    //             return;
-    //         }
-    //     }
-
-    //     // Update task data with the image URL if it was successfully uploaded
-    //     taskData.task_image_url = imageUrl;
-
-    //     try {
-    //         // Send the task data to your backend
-    //         const response = await axios.post('http://localhost:5000/tasks', taskData);
-
-    //         if (response.status === 200) {
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Task Added!',
-    //                 text: 'Your task has been successfully added.',
-    //             });
-
-    //             // Optionally navigate to the task list or home page
-    //             navigate('/');
-    //         } else {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Error!',
-    //                 text: 'There was an issue adding the task.',
-    //             });
-    //         }
-    //     } catch (err) {
-    //         console.error('Error:', err);
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Error!',
-    //             text: 'There was an error with the task submission.',
-    //         });
-    //     }
-    // };
-
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        // Convert `required_workers` and `payable_amount` to numbers
         const totalPayableAmount = Number(taskDetails.required_workers) * Number(taskDetails.payable_amount);
     
         // Task data
@@ -133,11 +66,10 @@ const AddNewTasks = () => {
             payable_amount: Number(taskDetails.payable_amount),
             completion_date: taskDetails.completion_date,
             submission_info: taskDetails.submission_info,
-            task_image_url: taskDetails.task_image_url, // This will be updated after image upload
+            task_image_url: taskDetails.task_image_url, 
             email: user?.email
         };
     
-        // Upload the image and get the image URL if an image is selected
         let imageUrl = '';
         if (imageFile) {
             try {
@@ -152,11 +84,9 @@ const AddNewTasks = () => {
             }
         }
     
-        // Update task data with the image URL if it was successfully uploaded
         taskData.task_image_url = imageUrl;
     
         try {
-            // Fetch the user's data from the backend (to get their current coin balance)
             const userResponse = await axios.get(`http://localhost:5000/users/${user?.email}`);
     
             if (userResponse.status === 200) {
@@ -190,8 +120,6 @@ const AddNewTasks = () => {
                             title: 'Task Added!',
                             text: 'Your task has been successfully added.',
                         });
-    
-                        // Optionally navigate to the task list or home page
                         navigate('/');
                     }
                 }
@@ -222,6 +150,7 @@ const AddNewTasks = () => {
                         onChange={handleInputChange}
                         className="w-full p-3 border rounded-md"
                         placeholder="Enter task title"
+                        required
                     />
                 </div>
 
@@ -234,6 +163,7 @@ const AddNewTasks = () => {
                         onChange={handleInputChange}
                         className="w-full p-3 border rounded-md"
                         placeholder="Enter task description"
+                        required
                     ></textarea>
                 </div>
 
@@ -247,6 +177,7 @@ const AddNewTasks = () => {
                         onChange={handleInputChange}
                         className="w-full p-3 border rounded-md"
                         placeholder="Enter the number of workers"
+                        required
                     />
                 </div>
 
@@ -260,6 +191,7 @@ const AddNewTasks = () => {
                         onChange={handleInputChange}
                         className="w-full p-3 border rounded-md"
                         placeholder="Enter amount per worker"
+                        required
                     />
                 </div>
 
@@ -272,6 +204,7 @@ const AddNewTasks = () => {
                         value={taskDetails.completion_date}
                         onChange={handleInputChange}
                         className="w-full p-3 border rounded-md"
+                        required
                     />
                 </div>
 
@@ -285,6 +218,7 @@ const AddNewTasks = () => {
                         onChange={handleInputChange}
                         className="w-full p-3 border rounded-md"
                         placeholder="What to submit (screenshot, proof)"
+                        required
                     />
                 </div>
 
@@ -296,6 +230,7 @@ const AddNewTasks = () => {
                         name="task_image_url"
                         onChange={handleImageChange}
                         className="w-full p-3 border rounded-md"
+                        requiredasd
                     />
                 </div>
 

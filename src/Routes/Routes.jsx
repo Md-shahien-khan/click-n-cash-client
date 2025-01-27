@@ -16,6 +16,7 @@ import TaskList from '../Pages/Dashboard/TaskList'
 import Withdrawals from '../Pages/Dashboard/Withdrawals'
 // import AdminRoute from "./AdminRoute";
 import TaskDetails from "../Pages/Dashboard/TaskDetails";
+import PurchaseCoin from "../Pages/Dashboard/PurchaseCoin";
 
 
 export const router = createBrowserRouter([
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
           path : 'taskList/taskDetails/:id',
           element : <TaskDetails></TaskDetails>,
           loader: ({ params }) => fetch(`http://localhost:5000/allTasks/${params.id}`)
+        },
+        {
+          path : 'purchaseCoin',
+          element : <PurchaseCoin></PurchaseCoin>
         },
         {
           path : 'withdrawals',

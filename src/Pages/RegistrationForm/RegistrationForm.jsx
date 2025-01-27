@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../Providers/AuthProvider'; // Assuming AuthContext is setup to handle auth
+import { AuthContext } from '../../Providers/AuthProvider'; 
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import useAxiosPublic from '../../hooks/useAxiosPublic'; // Import the useAxiosPublic hook
-import imgLogin from '../../assets/images/homeimg/login.jpg'; // Assuming this is the image
+import useAxiosPublic from '../../hooks/useAxiosPublic'; 
+import imgLogin from '../../assets/images/homeimg/login.jpg'; 
 import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const RegistrationForm = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext); // Get createUser from context
-  const axiosPublic = useAxiosPublic(); // Initialize axiosPublic
+  const { createUser, updateUserProfile } = useContext(AuthContext); 
+  const axiosPublic = useAxiosPublic(); 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -21,7 +21,7 @@ const RegistrationForm = () => {
     try {
       const { name, email, password, photoURL, role } = data;
 
-      // Call createUser function from AuthContext (Firebase authentication)
+  
       const userCredential = await createUser(email, password);
       const user = userCredential.user;
 
@@ -29,7 +29,7 @@ const RegistrationForm = () => {
       await updateUserProfile(name, photoURL);
 
       // Define the default coin value based on the role
-      const coins = role === 'worker' ? 10 : 50; // 10 coins for Worker, 50 coins for Buyer
+      const coins = role === 'worker' ? 10 : 50;
 
       // Create user data object
       const userInfo = {
@@ -120,10 +120,6 @@ const RegistrationForm = () => {
                 placeholder="Enter your email"
                 {...register("email", {
                   required: 'Email is required',
-                  // pattern: {
-                  //   value: /^[^@]+@[^@]+\.[^@]+$/,
-                  //   message: 'Please enter a valid email',
-                  // },
                 })}
                 className="w-full p-3 border border-gray-300 rounded-lg mt-2"
               />
@@ -132,24 +128,25 @@ const RegistrationForm = () => {
 
             {/* Password */}
             <div className="mb-4 relative">
-                <label className="block text-gray-700">Password</label>
-                  <input
-                    type={passwordVisible ? "text" : "password"}
-                    placeholder="Enter your password"
-                    {...register("password", {
-                    required: 'Password is required',
-                    minLength: {
-                      value: 6,
-                      message: 'Password should be at least 6 characters long',
-                      },
-                    })}
-                    className="w-full p-3 border border-gray-300 rounded-lg mt-2"/>
-                    <div className="absolute top-14 right-3 transform -translate-y-1/2 cursor-pointer"
-                      onClick={() => setPasswordVisible(!passwordVisible)}>
-                      {passwordVisible ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-                        </div>
-                          {errors.password && <span className="text-red-600">{errors.password.message}</span>}
-                        </div>
+              <label className="block text-gray-700">Password</label>
+              <input
+                type={passwordVisible ? "text" : "password"}
+                placeholder="Enter your password"
+                {...register("password", {
+                  required: 'Password is required',
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{1,10}$/,
+                    message: 'Password must contain at least one lowercase letter, one uppercase letter, one number, and no more than 8 characters.',
+                  },
+                })}
+                className="w-full p-3 border border-gray-300 rounded-lg mt-2"
+              />
+              <div className="absolute top-14 right-3 transform -translate-y-1/2 cursor-pointer"
+                onClick={() => setPasswordVisible(!passwordVisible)}>
+                {passwordVisible ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+              </div>
+              {errors.password && <span className="text-red-600">{errors.password.message}</span>}
+            </div>
             {/* Register Button */}
             <div className="mb-4 text-center">
               <input

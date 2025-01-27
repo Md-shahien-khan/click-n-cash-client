@@ -8,7 +8,7 @@ const DownloadApp = () => {
                 subHeading={"You can download the app from app store and play store"}
                 heading={"Download the app"}>
             </SectionTitle>
-            <div className="ms-50 md:ms-[120px] lg:ms-[550px]">
+            <div className="flex justify-center">
                 <img className="md:w-[500px]" src={appStoreImage} alt="" />
             </div>
         </section>

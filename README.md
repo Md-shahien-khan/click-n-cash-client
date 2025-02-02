@@ -32,7 +32,7 @@ Frontend:
 
 React.js
 
-React Router, React Icons, Js Swipper, Daisy ui, Sweet Alert, motion framer
+React Router, React Icons, Js Swipper, Daisy ui, Sweet Alert, motion framer, axios, tan stack qury.
 
 Backend:
 Firebase, NodeJS, ExpressJs, Mongodb.

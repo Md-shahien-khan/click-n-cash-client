@@ -50,6 +50,11 @@ const Dashboard = () => {
                     {role == 'buyer' && (
                         <>
                             <li className="bg-teal-950 rounded-md text-white">
+                                <NavLink to="/dashboard/buyerHome">
+                                    <IoIosAdd /> Buyer Home
+                                </NavLink>
+                            </li>
+                            <li className="bg-teal-950 rounded-md text-white">
                                 <NavLink to="/dashboard/addNewTasks">
                                     <IoIosAdd /> Add New Task
                                 </NavLink>
@@ -70,6 +75,11 @@ const Dashboard = () => {
                     {/* Worker navigation */}
                     {role == 'worker' && (
                         <>
+                            <li className="bg-teal-950 rounded-md text-white">
+                                <NavLink to="/dashboard/workerHome">
+                                    <FaTasks /> Worker Home
+                                </NavLink>
+                            </li>
                             <li className="bg-teal-950 rounded-md text-white">
                                 <NavLink to="/dashboard/taskList">
                                     <FaTasks /> Task List

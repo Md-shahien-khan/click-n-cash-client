@@ -28,8 +28,8 @@ const TaskDetails = () => {
     
     const workerEmail = user.email; 
     const workerName = user.displayName; 
-    const buyerName = task?.buyer_name || "Buyer Name"; 
-    const buyerEmail = task?.buyer_email || "Buyer Email";
+    // const buyerName = task?.buyer_name || "Buyer Name"; 
+    const buyerEmail = task?.email || "Buyer Email";
     const currentDate = new Date().toISOString();
 
     // Submit the submission to the backend

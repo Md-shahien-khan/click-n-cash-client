@@ -17,6 +17,8 @@ import Withdrawals from '../Pages/Dashboard/Withdrawals'
 // import AdminRoute from "./AdminRoute";
 import TaskDetails from "../Pages/Dashboard/TaskDetails";
 import PurchaseCoin from "../Pages/Dashboard/PurchaseCoin";
+import WorkerHome from "../Pages/Dashboard/WorkerHome";
+import BuyerHome from "../Pages/Dashboard/BuyerHome";
 
 
 export const router = createBrowserRouter([
@@ -42,6 +44,11 @@ export const router = createBrowserRouter([
       path : '/dashboard',
       element : <Dashboard></Dashboard>,
       children : [
+        // buyer router
+        {
+          path : 'buyerHome',
+          element : <BuyerHome></BuyerHome>
+        },
         {
           path : 'addNewTasks',
           element : <AddNewTasks></AddNewTasks>
@@ -58,9 +65,14 @@ export const router = createBrowserRouter([
           path : 'mySubmissions',
           element : <MySubmissions></MySubmissions>
         },
+        // worker router
         {
           path : 'myTasks',
           element : <MyTasks></MyTasks>
+        },
+        {
+          path : 'workerHome',
+          element : <WorkerHome></WorkerHome>
         },
         {
           path : 'taskList',

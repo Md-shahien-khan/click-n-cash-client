@@ -64,7 +64,7 @@ const TaskDetails = () => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'There was an error submitting your task. Please try again later.',
+        text: 'There was an error of submitting your task. Please try again later.',
         confirmButtonText: 'OK',
       });
     }
@@ -75,7 +75,7 @@ const TaskDetails = () => {
       {task ? (
         <div>
           <h2 className="text-xl md:text-4xl font-semibold text-teal-950">{task.task_title}</h2>
-          <div className="bg-white p-5 rounded shadow-md">
+          <div className="bg-white p-4 rounded shadow-md">
             <img src={task.task_image_url} alt={task.task_title} className="w-full h-64 object-cover mb-4" />
             <p><strong>Buyer Name:</strong> {task.buyer_name}</p>
             <p><strong>Completion Date:</strong> {task.completion_date}</p>

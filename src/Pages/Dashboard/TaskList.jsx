@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; 
-import axios from 'axios'; 
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { motion } from 'framer-motion';
 import { AuthContext } from '../../Providers/AuthProvider';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
-  const {user} = useContext(AuthContext);
-  console.log(user)
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     axios.get('https://click-n-cash-server.vercel.app/allTasks')
@@ -24,28 +24,41 @@ const TaskList = () => {
         <h2 className="text-xl md:text-4xl font-semibold text-teal-950">Tasks</h2>
         <p className="px-4 text-teal-900">Start earning money by completing simple tasks like clicking ads and surveys.</p>
       </div>
-      {/* task card */}
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-3 mt-5 md:mt-10">
-        {tasks.map(eachTask => (
-          <div key={eachTask._id} className="max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+      
+      {/* Task Cards */}
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-5 md:mt-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        {tasks.map((eachTask, index) => (
+          <motion.div 
+            key={eachTask._id} 
+            className="max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden flex flex-col p-5"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ scale: 1.05 }}
+          >
             <img className="w-full h-48 object-cover" src={eachTask.task_image_url} alt="Task Image" />
-            <div className="p-6">
+            <div className="p-6 flex-grow">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Task Title: <span className="font-medium text-blue-600">{eachTask.task_title}</span>
               </h2>
-              <p className="text-sm text-gray-600 mb-2"><strong>Buyer Name:</strong> {user.displayName
-              }</p>
               <p className="text-sm text-gray-600 mb-2"><strong>Completion Date:</strong> {eachTask.completion_date}</p>
               <p className="text-sm text-gray-600 mb-2"><strong>Payable Amount:</strong> ${eachTask.payable_amount}</p>
               <p className="text-sm text-gray-600 mb-4"><strong>Required Workers:</strong> {eachTask.required_workers}</p>
-
-              <Link
-              to={`taskDetails/${eachTask._id}`} 
-              className="block w-full text-center py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">View Details</Link>
             </div>
-          </div>
+            <Link
+                to={`taskDetails/${eachTask._id}`}
+                className="block w-full text-center py-2 bg-teal-500  text-white rounded-lg hover:bg-teal-700 transition duration-200"
+              >
+                View Details
+              </Link>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

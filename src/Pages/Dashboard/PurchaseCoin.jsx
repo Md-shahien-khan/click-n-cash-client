@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PurchaseCoin = () => {
     const packages = [
@@ -20,6 +21,7 @@ const PurchaseCoin = () => {
                         <h2 className="text-2xl font-bold mb-4 text-center">{pkg.coins} Coins</h2>
                         <p className="text-xl text-center mb-4">=</p>
                         <p className="text-2xl font-semibold text-center">${pkg.price}</p>
+                        <Link to='/dashboard/payment' className='btn mt-2 bg-green-300 '>Pay Now</Link>
                     </div>
                 ))}
             </div>

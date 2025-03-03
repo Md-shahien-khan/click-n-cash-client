@@ -28,7 +28,6 @@ const TaskDetails = () => {
     
     const workerEmail = user.email; 
     const workerName = user.displayName; 
-    // const buyerName = task?.buyer_name || "Buyer Name"; 
     const buyerEmail = task?.email || "Buyer Email";
     const currentDate = new Date().toISOString();
 
@@ -41,8 +40,7 @@ const TaskDetails = () => {
         worker_email: workerEmail,
         submission_details: submissionDetails,
         worker_name: workerName,
-        buyer_name: buyerName,
-        buyer_email: buyerEmail,
+        buyer_email: task.email,
         current_date: currentDate,
         status: 'pending',
       });

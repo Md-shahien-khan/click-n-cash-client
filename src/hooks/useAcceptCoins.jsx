@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Withdrawals = () => {
+const useAcceptCoins = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const Withdrawals = () => {
     );
 };
 
-export default Withdrawals;
+export default useAcceptCoins;

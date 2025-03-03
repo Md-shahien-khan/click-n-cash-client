@@ -7,9 +7,9 @@ import img3 from '../../assets/images/banner images/bannerImg2.jpg'
 const Banner = () => {
     return (
         <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false} dynamicHeight={false}>
-            {/* Carousel Item 1 */}
+             {/* Carousel Item 1 */}
             <div className="relative">
-                <img src={img1} alt="Banner 1" />
+                <img src={img1} alt="Banner 1"/>
                 {/* Semi-transparent background for better text visibility */}
                 <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"></div>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
@@ -47,3 +47,5 @@ const Banner = () => {
 };
 
 export default Banner;
+
+

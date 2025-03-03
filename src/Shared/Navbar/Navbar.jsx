@@ -25,7 +25,7 @@ const Navbar = () => {
             <li><Link to='/dashboard' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Dashboard</Link>
             </li>
             <li><button to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200 bg-teal-500">Available Coin {coins}<PiCoinVerticalBold className="text-yellow-600" /></button></li>
-            <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">User Profile</Link></li>
+            {/* <li><Link to='/' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">User Profile</Link></li> */}
             <button onClick={handleLogOut} className="btn btn-ghost text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Logout</button>
             </> : <>
             <li><Link to='/login' className="text-xl font-semibold text-teal-200 hover:text-teal-400 transition duration-200">Login</Link></li>

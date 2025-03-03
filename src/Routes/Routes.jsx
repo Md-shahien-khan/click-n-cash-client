@@ -19,6 +19,7 @@ import TaskDetails from "../Pages/Dashboard/TaskDetails";
 import PurchaseCoin from "../Pages/Dashboard/PurchaseCoin";
 import WorkerHome from "../Pages/Dashboard/WorkerHome";
 import BuyerHome from "../Pages/Dashboard/BuyerHome";
+import Payment from "../Pages/Dashboard/Payment";
 
 
 export const router = createBrowserRouter([
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
         {
           path : 'mySubmissions',
           element : <MySubmissions></MySubmissions>
+        },
+        {
+          path : 'payment',
+          element : <Payment></Payment>
         },
         // worker router
         {

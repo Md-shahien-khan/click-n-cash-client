@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthProvider, { AuthContext } from '../../Providers/AuthProvider';
 
 const PurchaseCoin = () => {
+    const {setCoins} = useContext(AuthContext);
     const packages = [
         { coins: 10, price: 1 },
         { coins: 150, price: 10 },
@@ -9,6 +11,9 @@ const PurchaseCoin = () => {
         { coins: 1000, price: 35 },
     ];
 
+    const singlePackage = (price) =>{
+        setCoins(price);
+    }
     return (
         <div className="p-8">
             <h1 className="text-3xl font-bold text-center mb-8 text-teal-600">Purchase Coins</h1>
@@ -21,7 +26,7 @@ const PurchaseCoin = () => {
                         <h2 className="text-2xl font-bold mb-4 text-center">{pkg.coins} Coins</h2>
                         <p className="text-xl text-center mb-4">=</p>
                         <p className="text-2xl font-semibold text-center">${pkg.price}</p>
-                        <Link to='/dashboard/payment' className='btn mt-2 bg-green-300 '>Pay Now</Link>
+                        <button onClick={()=>singlePackage(pkg.coins)}><Link to='/dashboard/payment' className='btn mt-2 bg-green-300 '>Pay Now</Link></button>
                     </div>
                 ))}
             </div>

@@ -32,38 +32,16 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const axiosPublic = useAxiosPublic();
+    const [coin, setCoins] = useState([]);
 
-    // // Query to fetch user's coins
-    // const { data, refetch } = useQuery({
-    //     queryKey: ['users', user?.email],
-    //     queryFn: async () => {
-    //         try {
-    //             // API call to get user data
-    //             const res = await axiosPublic.get(`https://click-n-cash-server.vercel.app/users/${user?.email}`);
-    //             console.log('API response:', res); // Log the full API response
-
-    //             // Check if the structure is as expected
-    //             if (res.data && res.data.user && res.data.user.coins !== undefined) {
-    //                 // If valid, set coins state and return coins
-    //                 setCoins(res.data.user.coins);
-    //                 return res.data.user.coins;
-    //             } else {
-    //                 throw new Error('Coins not found in response');
-    //             }
-    //         } catch (error) {
-    //             // If error occurs, log and return a default value
-    //             console.error('API request failed:', error);
-    //             return 0; // Return a default value
-    //         }
-    //     },
-    //     enabled: !!user?.email, // Ensure query only runs when there's a valid user email
-    // });
 
     // create user
     const createUser = (email, password) =>{
         // setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     };
+
+    console.log(coin);
 
     // sign in 
     const signIn = ( email, password) =>{
@@ -129,7 +107,8 @@ const AuthProvider = ({children}) => {
         logOut,
         updateUserProfile,
         googleSignIn,
-        // coins
+        coin,
+        setCoins
     }
     return (
         <AuthContext.Provider value={authInfo}>

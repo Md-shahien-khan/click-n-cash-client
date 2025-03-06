@@ -7,7 +7,7 @@ import useCoins from '../../hooks/useCoins';
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
-    const { user } = useContext(AuthContext);
+    const { user, coin } = useContext(AuthContext);
     const { coins } = useCoins();
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
@@ -17,7 +17,7 @@ const CheckoutForm = () => {
         if (user) {
             axios.post('https://click-n-cash-server.vercel.app/create-payment-intent', {
                 email: user.email,
-                amount: 500, // Set amount dynamically if needed
+                amount: coin, 
             })
             .then(res => setClientSecret(res.data.clientSecret))
             .catch(err => console.error('Error fetching clientSecret:', err));
@@ -53,7 +53,7 @@ const CheckoutForm = () => {
             
             axios.post('https://click-n-cash-server.vercel.app/update-coins', {
                 email: user.email,
-                coins: coins + 100, // Example: Add 100 coins
+                coins: coin, // Example: Add 100 coins
             })
             .then(response => {
                 console.log('Coins updated successfully', response.data);

@@ -104,11 +104,11 @@ const Dashboard = () => {
                     <FaDatabase /> My Submissions
                   </NavLink>
                 </li>
-                <li className="bg-teal-950 rounded-md text-white">
+                {/* <li className="bg-teal-950 rounded-md text-white">
                   <NavLink to="/dashboard/withdrawals" onClick={() => setIsSidebarOpen(false)}>
                     <FaMoneyBill /> Withdrawal
                   </NavLink>
-                </li>
+                </li> */}
               </>
             )}
 
